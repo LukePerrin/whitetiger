@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  whitetiger:
+    image: ${DOCKER_REGISTRY-}whitetiger
+    ports:
+     - 80:80              
+     - 443:443           
+    environment:
+    - ASPNETCORE_ENVIRONMENT=Development
+    - ASPNETCORE_URLS=https://+:443;http://+:80  
+    - ASPNETCORE_Certificates_Default_Path=/Certs/WhiteTigerCerts     
+    volumes:
+    - ~/Certs:/Certs:ro
+    build:
+      context: .
+      dockerfile: WhiteTiger/Dockerfile
